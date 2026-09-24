@@ -1,0 +1,177 @@
+{
+  "$defs": {
+    "ArtifactRef": {
+      "additionalProperties": false,
+      "properties": {
+        "uri": {
+          "maxLength": 300,
+          "pattern": "^artifact://[A-Za-z0-9/_-]+$",
+          "title": "Uri",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "owner_task_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "title": "Owner Task Id",
+          "type": "string"
+        },
+        "version": {
+          "minimum": 1,
+          "title": "Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "uri",
+        "sha256",
+        "owner_task_id",
+        "version"
+      ],
+      "title": "ArtifactRef",
+      "type": "object"
+    },
+    "ResultStatus": {
+      "enum": [
+        "CANDIDATE",
+        "SUCCESS",
+        "FAILED"
+      ],
+      "title": "ResultStatus",
+      "type": "string"
+    },
+    "VerificationStatus": {
+      "enum": [
+        "NOT_RUN",
+        "PASS",
+        "FAIL"
+      ],
+      "title": "VerificationStatus",
+      "type": "string"
+    },
+    "VerifierRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/VerificationStatus"
+        },
+        "verifier_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "title": "Verifier Id",
+          "type": "string"
+        },
+        "checks": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Checks",
+          "type": "array"
+        }
+      },
+      "required": [
+        "status",
+        "verifier_id",
+        "checks"
+      ],
+      "title": "VerifierRecord",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "run_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "task_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+      "title": "Task Id",
+      "type": "string"
+    },
+    "agent_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+      "title": "Agent Id",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/ResultStatus"
+    },
+    "summary": {
+      "maxLength": 4000,
+      "minLength": 1,
+      "title": "Summary",
+      "type": "string"
+    },
+    "data": {
+      "additionalProperties": true,
+      "title": "Data",
+      "type": "object"
+    },
+    "artifacts": {
+      "items": {
+        "$ref": "#/$defs/ArtifactRef"
+      },
+      "title": "Artifacts",
+      "type": "array"
+    },
+    "evidence": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "verifier": {
+      "$ref": "#/$defs/VerifierRecord"
+    },
+    "error": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Error"
+    },
+    "metrics": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Metrics",
+      "type": "object"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "run_id",
+    "task_id",
+    "agent_id",
+    "status",
+    "summary",
+    "data",
+    "artifacts",
+    "evidence",
+    "verifier",
+    "metrics",
+    "completed_at"
+  ],
+  "title": "ResultEnvelope",
+  "type": "object"
+}

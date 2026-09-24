@@ -1,0 +1,133 @@
+{
+  "$defs": {
+    "Budget": {
+      "additionalProperties": false,
+      "properties": {
+        "max_steps": {
+          "maximum": 1000,
+          "minimum": 1,
+          "title": "Max Steps",
+          "type": "integer"
+        },
+        "max_llm_calls": {
+          "maximum": 1000,
+          "minimum": 0,
+          "title": "Max Llm Calls",
+          "type": "integer"
+        },
+        "max_tool_calls": {
+          "maximum": 10000,
+          "minimum": 0,
+          "title": "Max Tool Calls",
+          "type": "integer"
+        },
+        "timeout_seconds": {
+          "maximum": 86400,
+          "minimum": 1,
+          "title": "Timeout Seconds",
+          "type": "integer"
+        },
+        "max_tasks": {
+          "default": 16,
+          "maximum": 128,
+          "minimum": 1,
+          "title": "Max Tasks",
+          "type": "integer"
+        },
+        "max_depth": {
+          "default": 8,
+          "maximum": 32,
+          "minimum": 1,
+          "title": "Max Depth",
+          "type": "integer"
+        },
+        "max_concurrency": {
+          "default": 4,
+          "maximum": 32,
+          "minimum": 1,
+          "title": "Max Concurrency",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "max_steps",
+        "max_llm_calls",
+        "max_tool_calls",
+        "timeout_seconds"
+      ],
+      "title": "Budget",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "run_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "goal": {
+      "maxLength": 4000,
+      "minLength": 1,
+      "title": "Goal",
+      "type": "string"
+    },
+    "constraints": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Constraints",
+      "type": "array"
+    },
+    "acceptance_criteria": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Acceptance Criteria",
+      "type": "array"
+    },
+    "permissions": {
+      "items": {
+        "pattern": "^[a-z][a-z0-9_.]{0,79}$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Permissions",
+      "type": "array"
+    },
+    "context_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Context Refs",
+      "type": "array"
+    },
+    "budget": {
+      "$ref": "#/$defs/Budget"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "run_id",
+    "goal",
+    "constraints",
+    "acceptance_criteria",
+    "permissions",
+    "context_refs",
+    "budget",
+    "created_at"
+  ],
+  "title": "TaskContract",
+  "type": "object"
+}

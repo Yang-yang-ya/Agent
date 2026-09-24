@@ -1,0 +1,159 @@
+{
+  "$defs": {
+    "TaskStatus": {
+      "enum": [
+        "PENDING",
+        "READY",
+        "QUEUED",
+        "RUNNING",
+        "VERIFYING",
+        "RETRY_WAIT",
+        "WAITING_APPROVAL",
+        "WAITING_REVIEW",
+        "SUCCESS",
+        "FAILED",
+        "CANCELLED"
+      ],
+      "title": "TaskStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "task_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+      "title": "Task Id",
+      "type": "string"
+    },
+    "run_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "goal": {
+      "maxLength": 4000,
+      "minLength": 1,
+      "title": "Goal",
+      "type": "string"
+    },
+    "capability": {
+      "pattern": "^[a-z][a-z0-9_.]{0,79}$",
+      "title": "Capability",
+      "type": "string"
+    },
+    "depends_on": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+        "type": "string"
+      },
+      "title": "Depends On",
+      "type": "array"
+    },
+    "status": {
+      "$ref": "#/$defs/TaskStatus"
+    },
+    "priority": {
+      "maximum": 100,
+      "minimum": 0,
+      "title": "Priority",
+      "type": "integer"
+    },
+    "attempt": {
+      "minimum": 0,
+      "title": "Attempt",
+      "type": "integer"
+    },
+    "max_attempts": {
+      "maximum": 3,
+      "minimum": 1,
+      "title": "Max Attempts",
+      "type": "integer"
+    },
+    "agent_id": {
+      "anyOf": [
+        {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Agent Id"
+    },
+    "input_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Input Refs",
+      "type": "array"
+    },
+    "output_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Output Refs",
+      "type": "array"
+    },
+    "idempotency_scope": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+      "title": "Idempotency Scope",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "allowed_tools": {
+      "items": {
+        "pattern": "^[a-z][a-z0-9_.]{0,79}$",
+        "type": "string"
+      },
+      "title": "Allowed Tools",
+      "type": "array"
+    },
+    "workspace_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Workspace Ref"
+    },
+    "state_version": {
+      "default": 0,
+      "minimum": 0,
+      "title": "State Version",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "schema_version",
+    "task_id",
+    "run_id",
+    "goal",
+    "capability",
+    "depends_on",
+    "status",
+    "priority",
+    "attempt",
+    "max_attempts",
+    "input_refs",
+    "output_refs",
+    "idempotency_scope",
+    "created_at"
+  ],
+  "title": "Task",
+  "type": "object"
+}

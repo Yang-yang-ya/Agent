@@ -1,0 +1,38 @@
+[
+  {
+    "schema_version": 1,
+    "agent_id": "research_agent",
+    "version": "0.1.0",
+    "capabilities": ["research.inspect"],
+    "allowed_tools": ["repo.inspect"],
+    "forbidden_tools": ["sandbox.apply_patch"],
+    "model_profile": "deterministic-v0",
+    "risk_ceiling": "L0",
+    "timeout_seconds": 120,
+    "max_steps": 4
+  },
+  {
+    "schema_version": 1,
+    "agent_id": "rag_agent",
+    "version": "0.1.0",
+    "capabilities": ["rag.retrieve"],
+    "allowed_tools": ["rag.search.local"],
+    "forbidden_tools": ["sandbox.apply_patch"],
+    "model_profile": "deterministic-v0",
+    "risk_ceiling": "L0",
+    "timeout_seconds": 120,
+    "max_steps": 4
+  },
+  {
+    "schema_version": 1,
+    "agent_id": "coding_agent",
+    "version": "0.1.0",
+    "capabilities": ["coding.patch.draft", "coding.patch.verify"],
+    "allowed_tools": ["patch.propose", "sandbox.apply_patch", "sandbox.pytest"],
+    "forbidden_tools": [],
+    "model_profile": "deterministic-v0",
+    "risk_ceiling": "L1",
+    "timeout_seconds": 300,
+    "max_steps": 8
+  }
+]

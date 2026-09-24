@@ -1,0 +1,3 @@
+{
+  "permissions": ["repo.read", "repo.write.sandbox", "sandbox.execute", "rag.search.local"]
+}

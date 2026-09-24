@@ -1,0 +1,92 @@
+{
+  "$defs": {
+    "RiskLevel": {
+      "enum": [
+        "L0",
+        "L1",
+        "L2",
+        "L3"
+      ],
+      "title": "RiskLevel",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "agent_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+      "title": "Agent Id",
+      "type": "string"
+    },
+    "version": {
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "title": "Version",
+      "type": "string"
+    },
+    "capabilities": {
+      "items": {
+        "pattern": "^[a-z][a-z0-9_.]{0,79}$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Capabilities",
+      "type": "array"
+    },
+    "allowed_tools": {
+      "items": {
+        "pattern": "^[a-z][a-z0-9_.]{0,79}$",
+        "type": "string"
+      },
+      "title": "Allowed Tools",
+      "type": "array"
+    },
+    "forbidden_tools": {
+      "items": {
+        "pattern": "^[a-z][a-z0-9_.]{0,79}$",
+        "type": "string"
+      },
+      "title": "Forbidden Tools",
+      "type": "array"
+    },
+    "model_profile": {
+      "maxLength": 120,
+      "minLength": 1,
+      "title": "Model Profile",
+      "type": "string"
+    },
+    "risk_ceiling": {
+      "$ref": "#/$defs/RiskLevel"
+    },
+    "timeout_seconds": {
+      "maximum": 86400,
+      "minimum": 1,
+      "title": "Timeout Seconds",
+      "type": "integer"
+    },
+    "max_steps": {
+      "maximum": 1000,
+      "minimum": 1,
+      "title": "Max Steps",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "schema_version",
+    "agent_id",
+    "version",
+    "capabilities",
+    "allowed_tools",
+    "forbidden_tools",
+    "model_profile",
+    "risk_ceiling",
+    "timeout_seconds",
+    "max_steps"
+  ],
+  "title": "AgentManifest",
+  "type": "object"
+}

@@ -1,0 +1,12 @@
+.venv*/
+.idea/
+.virtualenv-cache/
+.wheelhouse/
+.pytest-*/
+.migration-test/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+*.egg-info/
+build/
+dist/

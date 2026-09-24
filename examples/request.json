@@ -1,0 +1,15 @@
+{
+  "goal": "基于受控演示仓库分析登录异常并提出最小修复",
+  "constraints": ["仅修改演示仓库", "不访问生产系统", "不新增外部依赖"],
+  "acceptance_criteria": ["root_cause_with_evidence", "pytest_login_passes", "patch_reproducible"],
+  "context_refs": ["fixture://login-incident"],
+  "budget": {
+    "max_steps": 20,
+    "max_llm_calls": 12,
+    "max_tool_calls": 30,
+    "timeout_seconds": 600,
+    "max_tasks": 5,
+    "max_depth": 4,
+    "max_concurrency": 2
+  }
+}
