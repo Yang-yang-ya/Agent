@@ -22,3 +22,13 @@
 ## Phase 3 之后
 
 按蓝图依次增加 DAG 执行与并发、恢复与 Outbox/队列、Policy/Tool Gateway/Docker Sandbox、最小 Context/Experience，以及评测和 Compose。Phase 5 的隔离执行验收前，CodingAgent 只能形成补丁草稿，不运行生成代码或写宿主仓库。
+
+## 可视化平台与跨界面一致性
+
+详细架构门槛见 [终端与 Web 协同治理基线](terminal-web-sync-governance.md)。
+
+- [ ] P0：统一草案格式、受信合同与外部请求的导入规则；让 CLI 和 Web 对同一计划得到一致校验结果。
+- [ ] P0：为校验错误提供稳定错误码、字段路径和相关 Task ID，并定义目录与预检 API。
+- [ ] Phase 2：持久 Run 命令共用 API/服务层；状态与事件同事务提交，支持版本冲突和幂等键；Phase 4 接入队列时将 Outbox 纳入同一事务。
+- [ ] 运行详情上线前：页面快照带事件游标；SSE 可回放、去重和断线重同步。
+- [ ] Phase 4–5：验证 Redis 丢失、Worker 重启、工作区哈希不一致和外部副作用不确定时的恢复与审计。
