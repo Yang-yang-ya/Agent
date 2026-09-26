@@ -7,10 +7,10 @@ name = "ai-agent-framework"
 version = "0.1.0a1"
 description = "Phase 1 contracts and plan validation for a secure hierarchical agent runtime"
 requires-python = ">=3.11,<4"
-dependencies = ["pydantic==2.13.5"]
+dependencies = ["pydantic==2.13.5", "fastapi==0.141.1", "uvicorn==0.53.0"]
 
 [project.optional-dependencies]
-dev = ["pytest==9.1.1"]
+dev = ["pytest==9.1.1", "httpx==0.28.1"]
 
 [project.scripts]
 agent-framework = "agent_runtime.cli:main"
