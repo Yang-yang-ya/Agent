@@ -26,6 +26,7 @@
 ## 可视化平台与跨界面一致性
 
 详细架构门槛见 [终端与 Web 协同治理基线](terminal-web-sync-governance.md)。
+断点重连的可行性判断、分阶段实施和故障注入验收见 [Agent 工作断点重连与恢复可行性报告](agent-breakpoint-recovery-feasibility.md)。
 
 - [x] P0：统一草案格式、受信合同与外部请求的导入规则；让 CLI 和 Web 对同一计划得到一致校验结果。
 - [x] P0：为校验错误提供稳定错误码、字段路径和相关 Task ID，并定义目录与预检 API。
